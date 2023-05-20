@@ -1,0 +1,23 @@
+#!/bin/bash
+apt-get update -y
+apt-get upgrade -y
+apt-get install nginx -y
+MYIP=`curl http://169.254.169.254/latest/meta-data/local-ipv4`
+
+
+cat <<EOF > /var/www/html/index.html
+<html>
+<h2>Built by Power of <font color="red">Terraform</font></h2><br>
+
+WebServer with Static IP! <br>
+
+<br>
+PrivateIP: $MYIP
+
+<p>
+<font color="blue">Version 4.1</font>
+</html>
+EOF
+
+systemctl start nginx
+systemctl enable nginx
