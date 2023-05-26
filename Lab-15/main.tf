@@ -2,10 +2,7 @@ provider "aws" {
   region                    = var.aws-region
 
   default_tags {
-    tags = {
-      Owner                 = "Chris Horrocks"
-      CreatedBy             = "Terraform"
-    }
+    tags = var.aws-tags-default
   }
 }
 
@@ -55,7 +52,7 @@ resource "aws_security_group" "web" {
 resource "aws_launch_template" "web" {
   name                      = "WebServer-Highly-Available-LT"
   image_id                  = data.aws_ami.latest_amazon_linux.id
-  instance_type             = "t3.micro"
+  instance_type             = var.aws-ec2-instance-slug
   vpc_security_group_ids    = [aws_security_group.web.id]
   user_data                 = filebase64("${path.module}/user_data.sh")
 }
