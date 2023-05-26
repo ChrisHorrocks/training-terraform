@@ -21,3 +21,9 @@ variable "aws-tags-default" {
       CreatedBy   = "Terraform"
     }
 }
+
+variable "aws-sg-web-ports-default" {
+    description   = "AWS Security Group Web default ingress ports."
+    type          = list(string)
+    default       = ["80", "443"]
+}

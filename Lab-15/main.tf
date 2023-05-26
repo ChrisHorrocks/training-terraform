@@ -30,7 +30,7 @@ resource "aws_security_group" "web" {
   name                      = "Web Security Group"
   vpc_id                    = aws_default_vpc.default.id
   dynamic "ingress" {
-    for_each                = ["80", "443"]
+    for_each                = var.aws-sg-web-ports-default
     content {
       from_port             = ingress.value
       to_port               = ingress.value
