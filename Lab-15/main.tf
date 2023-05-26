@@ -2,17 +2,17 @@ provider "aws" {
   region                    = var.aws-region
 
   default_tags {
-    tags = var.aws-tags-default
+    tags                    = var.aws-tags-default
   }
 }
 
 data "aws_availability_zones" "working" {}
 data "aws_ami" "latest_amazon_linux" {
-  owners                    = ["137112412989"]
+  owners                    = var.aws-ami-amazon-linux-owner
   most_recent               = true
   filter {
     name                    = "name"
-    values                  = ["amzn2-ami-hvm-*-x86_64-gp2"]
+    values                  = var.aws-ami-amazon-linux-name
   }
 }
 
@@ -35,14 +35,14 @@ resource "aws_security_group" "web" {
       from_port             = ingress.value
       to_port               = ingress.value
       protocol              = "tcp"
-      cidr_blocks           = ["0.0.0.0/0"]
+      cidr_blocks           = var.aws-sg-web-ingress-cidr-default
     }
   }
   egress {
     from_port               = 0
     to_port                 = 0
     protocol                = "-1"
-    cidr_blocks             = ["0.0.0.0/0"]
+    cidr_blocks             = var.aws-sg-web-egress-cidr-default
   }
   tags = {
     Name                    = "Web Security Group"

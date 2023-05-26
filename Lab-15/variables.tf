@@ -27,3 +27,27 @@ variable "aws-sg-web-ports-default" {
     type          = list(string)
     default       = ["80", "443"]
 }
+
+variable "aws-sg-web-ingress-cidr-default" {
+    description   = "AWS Security Group Web default ingress CIDR blocks."
+    type          = list(string)
+    default       = ["0.0.0.0/0"]
+}
+
+variable "aws-sg-web-egress-cidr-default" {
+    description   = "AWS Security Group Web default egress CIDR blocks."
+    type          = list(string)
+    default       = ["0.0.0.0/0"]
+}
+
+variable "aws-ami-amazon-linux-owner" {
+  description   = "AWS AMI Owner for Amazon Linux."
+  type          = list(string)
+  default       = ["137112412989"]
+}
+
+variable "aws-ami-amazon-linux-name" {
+  description   = "AWS AMI Owner for Amazon Linux."
+  type          = list(string)
+  default       = ["amzn2-ami-hvm-*-x86_64-gp2"]
+}
